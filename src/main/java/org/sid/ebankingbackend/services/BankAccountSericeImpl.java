@@ -73,18 +73,9 @@ public class BankAccountSericeImpl implements BankAccountService {
     @Override
     public List<CustomerDTO> listCustomers() {
         List<Customer> customers = customerRepository.findAll();
-        List<CustomerDTO> customerDTOS = customers.stream()
+        return customers.stream()
                 .map(customer -> dtoMapper.fromCustomer(customer))
                 .collect(Collectors.toList());
-        /*
-        List<CustomerDTO> customerDTOS=new ArrayList<>();
-        for (Customer customer:customers){
-            CustomerDTO customerDTO=dtoMapper.fromCustomer(customer);
-            customerDTOS.add(customerDTO);
-        }
-        *
-         */
-        return customerDTOS;
     }
 
     @Override
@@ -139,7 +130,7 @@ public class BankAccountSericeImpl implements BankAccountService {
     @Override
     public List<BankAccountDTO> bankAccountList(){
         List<BankAccount> bankAccounts = bankAccountRepository.findAll();
-        List<BankAccountDTO> bankAccountDTOS = bankAccounts.stream().map(bankAccount -> {
+        return bankAccounts.stream().map(bankAccount -> {
             if (bankAccount instanceof SavingAccount savingAccount) {
                 return dtoMapper.fromSavingBankAccount(savingAccount);
             } else {
@@ -147,7 +138,6 @@ public class BankAccountSericeImpl implements BankAccountService {
                 return dtoMapper.fromCurrentBankAccount(currentAccount);
             }
         }).collect(Collectors.toList());
-        return bankAccountDTOS;
     }
     @Override
     public CustomerDTO getCustomer(Long customerId) throws CustomerNotFoundException {
@@ -192,7 +182,6 @@ public class BankAccountSericeImpl implements BankAccountService {
     @Override
     public List<CustomerDTO> searchCustomers(String keyword) {
         List<Customer> customers=customerRepository.searchCustomer(keyword);
-        List<CustomerDTO> customerDTOS = customers.stream().map(cust -> dtoMapper.fromCustomer(cust)).collect(Collectors.toList());
-        return customerDTOS;
+        return customers.stream().map(cust -> dtoMapper.fromCustomer(cust)).collect(Collectors.toList());
     }
 }
