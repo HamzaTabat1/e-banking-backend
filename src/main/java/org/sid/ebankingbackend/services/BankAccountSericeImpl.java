@@ -91,8 +91,7 @@ public class BankAccountSericeImpl implements BankAccountService {
     public BankAccountDTO getBankAccount(String accountId) throws BankAccountNotFoundException {
         BankAccount bankAccount=bankAccountRepository.findById(accountId)
                 .orElseThrow(()->new BankAccountNotFoundException("BankAccount not found"));
-        if(bankAccount instanceof SavingAccount){
-            SavingAccount savingAccount= (SavingAccount) bankAccount;
+        if(bankAccount instanceof SavingAccount savingAccount){
             return dtoMapper.fromSavingBankAccount(savingAccount);
         } else {
             CurrentAccount currentAccount= (CurrentAccount) bankAccount;
@@ -141,8 +140,7 @@ public class BankAccountSericeImpl implements BankAccountService {
     public List<BankAccountDTO> bankAccountList(){
         List<BankAccount> bankAccounts = bankAccountRepository.findAll();
         List<BankAccountDTO> bankAccountDTOS = bankAccounts.stream().map(bankAccount -> {
-            if (bankAccount instanceof SavingAccount) {
-                SavingAccount savingAccount = (SavingAccount) bankAccount;
+            if (bankAccount instanceof SavingAccount savingAccount) {
                 return dtoMapper.fromSavingBankAccount(savingAccount);
             } else {
                 CurrentAccount currentAccount = (CurrentAccount) bankAccount;

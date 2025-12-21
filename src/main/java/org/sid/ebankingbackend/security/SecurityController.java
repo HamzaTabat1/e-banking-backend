@@ -24,10 +24,13 @@ import java.util.stream.Collectors;
 
 public class SecurityController {
 
-    @Autowired
     private AuthenticationManager authenticationManager;
-    @Autowired
     private JwtEncoder jwtEncoder;
+
+    public SecurityController(AuthenticationManager authenticationManager, JwtEncoder jwtEncoder) {
+        this.authenticationManager = authenticationManager;
+        this.jwtEncoder = jwtEncoder;
+    }
     @GetMapping("/profile")
     public Authentication authentication(Authentication authentication) {
         return authentication;

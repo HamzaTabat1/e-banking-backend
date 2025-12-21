@@ -54,8 +54,8 @@ public class EbankingBackendApplication {
             for (BankAccountDTO bankAccount:bankAccounts){
                 for (int i = 0; i <10 ; i++) {
                     String accountId;
-                    if(bankAccount instanceof SavingBankAccountDTO){
-                        accountId=((SavingBankAccountDTO) bankAccount).getId();
+                    if(bankAccount instanceof SavingBankAccountDTO savingBankAccountDTO){
+                        accountId=savingBankAccountDTO.getId();
                     } else{
                         accountId=((CurrentBankAccountDTO) bankAccount).getId();
                     }
