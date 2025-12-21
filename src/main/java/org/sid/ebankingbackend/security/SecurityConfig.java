@@ -42,8 +42,8 @@ public class SecurityConfig {
     public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         PasswordEncoder passwordEncoder = passwordEncoder();
         return new InMemoryUserDetailsManager(
-                User.withUsername("user1").password(passwordEncoder.encode("12345")).authorities("USER").build(),
-                User.withUsername("user2").password(passwordEncoder.encode("12345")).authorities("USER").build()
+                User.withUsername("user1").password(passwordEncoder.encode("newSecurePassword1!")).authorities("USER").build(),
+                User.withUsername("user2").password(passwordEncoder.encode("anotherSecurePassword2@")).authorities("USER").build()
         );
     }
 
